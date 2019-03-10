@@ -12,7 +12,7 @@ class DQNAgent:
     """Interacts with and learns from the environment."""
 
     def __init__(self, state_size, action_size,
-                 memory=None, device='cpu', weights_filename=None, params=None):
+                 memory=None, device='cpu', weights_filename=None, params=None, train_mode=True):
         """Initialize an Agent object.
         
         Params
@@ -23,6 +23,7 @@ class DQNAgent:
             device (str): device string between cuda:0 and cpu
             weights_filename (str): file name having weights of local Q network to load
             params (dict): hyper-parameters
+            train_mode (bool): True if it is train mode, otherwise False
         """
         self.state_size = state_size
         self.action_size = action_size
@@ -36,10 +37,15 @@ class DQNAgent:
         self.seed = random.seed(params['seed'])
 
         # Q-Network
+        if train_mode:
+            drop_p = params['drop_p']
+        else:
+            drop_p = 0
+
         self.qnetwork_local = QNetwork(state_size, action_size, params['seed'],
-                                       params['hidden_layers'], params['drop_p']).to(device)
+                                       params['hidden_layers'], drop_p).to(device)
         self.qnetwork_target = QNetwork(state_size, action_size, params['seed'],
-                                        params['hidden_layers'], params['drop_p']).to(device)
+                                        params['hidden_layers'], drop_p).to(device)
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=self.lr)
 
         # Replay memory
