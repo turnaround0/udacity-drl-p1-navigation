@@ -89,6 +89,11 @@ class Agent:
 
         # Get max predicted Q values (for next states) from target model
         # q_targets_next = max Q(next state, next action, theta dash)
+        # qnetwork_target(next_states): Q values[next_states][action]
+        #   .detach(): detached from the current graph
+        #   .max(1): first - max(Q values), second - action: argmax(Q values), third - device (cuda:0 or cpu)
+        #   .max(1)[0]: select max(Q values)
+        #   .unsqueeze(1)): from 1d-array to 2d-matrix ([a,b,c] -> [[a], [b], [c]])
         q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
 
         # Compute Q targets for current states
