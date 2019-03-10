@@ -16,8 +16,8 @@ An agent should navigate to collect only yellow bananas as much as possible.
 * Tau(for soft update of target parameters): 0.001 
 * Learning rate: 0.0005 
 * Update every(how often to update the network): 4
-* Number of nodes in first hidden_layers: 64
-* Number of nodes in second hidden_layers: 32
+* Number of nodes in first hidden layers: 64
+* Number of nodes in second hidden layers: 32
 * Probability of dropout: 0.2
 
 ## Learning algorithms
@@ -55,8 +55,6 @@ Environment solved in 398 episodes!	Average Score: 13.02
 
 Episode 1500	Average Score: 15.90
 
-![Trained DQN Agent]()
-
 ### 2. Double Deep Q Network learning (DDQN)
 * Reference: [Double DQN](https://arxiv.org/abs/1509.06461)
 
@@ -78,8 +76,6 @@ Environment solved in 350 episodes!	Average Score: 13.06
 Episode 1500	Average Score: 16.41
 
 Result of DDQN is slightly better than result of DQN on this experiment.
-
-![Trained DDQN Agent]()
 
 ### 3. Future improvement
 * [Prioritized experience replay](https://arxiv.org/abs/1511.05952)
