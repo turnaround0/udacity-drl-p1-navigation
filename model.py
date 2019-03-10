@@ -38,10 +38,10 @@ class QNetwork(nn.Module):
         :return action values
         """
 
-        # Forward through each layer in `hidden_layers`, with ReLU activation and dropout
+        # Forward through each layer in `hidden_layers`, with leaky ReLU activation and dropout
         x = state
         for linear in self.hidden_layers:
-            x = f.relu(linear(x))
+            x = f.leaky_relu(linear(x))
             x = self.dropout(x)
 
         return self.output(x)
