@@ -43,6 +43,9 @@ class ReplayBuffer:
 
         return states, actions, rewards, next_states, dones
 
+    def get_batch_size(self):
+        return self.batch_size
+
     def __len__(self):
         """Return the current size of internal memory."""
         return len(self.memory)
